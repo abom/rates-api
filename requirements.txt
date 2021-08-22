@@ -1,0 +1,9 @@
+Django>=3.0,<4.0
+psycopg2-binary>=2.8
+django-dramatiq==0.10.0
+django-periodiq==0.1.1
+redis==3.5.3
+django-redis==5.0.0
+requests==2.26.0
+djangorestframework==3.12.4
+pytest
