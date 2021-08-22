@@ -5,7 +5,7 @@ from rateapi.app.models import APIKey
 
 
 class Command(BaseCommand):
-    help = "Closes the specified poll for voting"
+    help = "Revoke an existing API key"
 
     def add_arguments(self, parser):
         parser.add_argument("key", type=str)
