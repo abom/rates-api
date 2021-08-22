@@ -3,7 +3,16 @@ An API server to query current BTC/USD exchange rate, actual rates are fetched f
 
 ### Running
 
-`docker-compose` will pull and start the required database and servers:
+Before running, you will have to set `alpha vantage` API key in `.env` file inside the root directory of this repository, the file should contain at least the environment variable of `ALPHAVANTAGE_API_KEY`, example:
+
+```
+PYTHONUNBUFFERED=1
+ALPHAVANTAGE_API_KEY=XOMNEID0Q7OJO5E4
+```
+
+You can get your alphavantage.com API key from [here](https://www.alphavantage.co/support/#api-key).
+
+Then you can use `docker-compose`, which will pull and start the required database and servers
 
 ```
 sudo docker-compose up
