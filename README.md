@@ -6,10 +6,10 @@ An API server to query current BTC/USD exchange rate, actual rates are fetched f
 `docker-compose` will pull and start the required database and servers:
 
 ```
-docker-compose up
+sudo docker-compose up
 ```
 
-You can retry it with `sudo` if you face any permission issues.
+You can retry it without `sudo` if you didn't face any permission issues.
 
 #### Generating and revoking API keys
 
