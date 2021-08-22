@@ -1,0 +1,52 @@
+version: "3.2"
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  redis:
+    image: "redis:alpine"
+
+  migration:
+    build: .
+    env_file: .env
+    command: sh -c '/wait-for db:5432 -- python manage.py makemigrations app && python manage.py migrate'
+    volumes:
+      - .:/code
+    depends_on:
+      - db
+
+  dramatiq:
+    build: .
+    env_file: .env
+    command: python manage.py rundramatiq
+    volumes:
+      - .:/code
+    depends_on:
+      - migration
+
+  periodiq:
+    build: .
+    env_file: .env
+    command: python manage.py runperiodiq
+    volumes:
+      - .:/code
+    depends_on:
+      - dramatiq
+
+  web:
+    build: .
+    env_file: .env
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - periodiq
