@@ -40,7 +40,7 @@ curl -XPOST http://localhost:8000/api/v1/quotes/ -H "X-API-KEY: dNel0RwE2cv9c9fq
 ```
 
 
-TO revoke this key, issue the `revokekey` command:
+To revoke this key, issue the `revokekey` command:
 
 ```
 docker-compose run web python manage.py revokekey dNel0RwE2cv9c9fqBSok9G9Clf5ByPlZcwgtoMquiwZWT1y3DDuJTQi4QLu93KRi
@@ -64,3 +64,9 @@ Authentication using `X-API-KEY` as a custom header with the value of a generate
 | /quotes | GET    | Get current rate                     | JSON body, example: {"from_currency":"BTC","to_currency":"USD","rate":"49142.73000000","last_update":1629596881.0} | 200         |
 | /quotes | POST   | Force fetching latest exchange rates | None                                                                                                               | 204         |
 
+
+In case of errors, a JSON formatted error will be returned with a corresponding status code, e.g.:
+
+```
+{"message": "X-API-Key header is missing or not valid", "code": "authentication_error"}
+```
